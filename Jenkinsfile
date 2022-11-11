@@ -9,6 +9,11 @@ pipeline {
         CI = 'true'
     }
     stages {
+         stage('Configure') {
+            steps {
+                sh 'set NODE_OPTIONS=--openssl-legacy-provider'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'npm install'
