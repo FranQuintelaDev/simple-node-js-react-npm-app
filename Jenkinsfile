@@ -12,6 +12,8 @@ pipeline {
          stage('Configure') {
             steps {
                 sh 'set NODE_OPTIONS=--openssl-legacy-provider'
+                sh 'export NODE_OPTIONS=--openssl-legacy-provider'
+                sh '$env:NODE_OPTIONS = "--openssl-legacy-provider"'
             }
         }
         stage('Build') {
