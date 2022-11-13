@@ -6,7 +6,7 @@ pipeline {
         }
     }
     tools {
-        jdk 'jdk11'
+        jdk 'jdk-11.0.16.101-hotspot'
     }
     environment {
         CI = 'true'
@@ -30,7 +30,7 @@ pipeline {
         }
         stage('SonarQube analysis') {
             tools {
-                jdk 'jdk11'
+                jdk 'jdk-11.0.16.101-hotspot'
             }
             environment {
                 CI = 'true'
