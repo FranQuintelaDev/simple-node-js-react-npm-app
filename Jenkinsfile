@@ -19,7 +19,16 @@ pipeline {
             steps {
                 sh 'set NODE_OPTIONS=--openssl-legacy-provider'
                 sh 'export NODE_OPTIONS=--openssl-legacy-provider'
+                withSonarQubeEnv('SonarQube', envOnly: true) {
+                  // This expands the evironment variables SONAR_CONFIG_NAME, SONAR_HOST_URL, SONAR_AUTH_TOKEN that can be used by any script.
+                  println ${env.SONAR_HOST_URL} 
+                }
+                def scannerHome = tool 'SonarScanner 4.0';
+                withSonarQubeEnv('SonarQube') { // If you have configured more than one global server connection, you can specify its name
+                  sh "${scannerHome}/bin/sonar-scanner"
+                }
             }
+           
         }
         stage('Build') {
             steps {
