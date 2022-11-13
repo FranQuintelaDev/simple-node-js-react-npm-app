@@ -6,7 +6,7 @@ pipeline {
         }
     }
     tools {
-        jdk 'Java SE Development Kit 9.0.4'
+        jdk 'jdk11'
     }
     environment {
         CI = 'true'
@@ -30,8 +30,7 @@ pipeline {
         }
         stage('SonarQube analysis') {
             tools {
-                jdk 'jdk-11.0.16.101-hotspot'
-                jdk 'Java SE Development Kit 9.0.4'
+                jdk 'jdk11'
             }
             environment {
                 CI = 'true'
@@ -42,7 +41,7 @@ pipeline {
                 sh 'npm run test -- --coverage . --watchAll=false'
                 sh 'chmod +x /var/jenkins_home/workspace/simple-node-js-react-npm-app/node_modules/sonar-scanner/bin/sonar-scanner'
                 withSonarQubeEnv('SonarQube') {
-                    sh "npx sonar-scanner -D sonar.projectKey=React-SonarQube -D sonar.login=b082a592b5caae1791279ed841c00f3d865a24e4"
+                    sh "npx sonar-scanner -D sonarprojectKey=React-SonarQube -D sonar.login=b082a592b5caae1791279ed841c00f3d865a24e4 -D sonar.sources=. -D sonar.host.url=http://localhost:9000"
                 }
             }
         }
