@@ -6,11 +6,12 @@ pipeline {
         }
     }
     tools {
+        jdk 'jdk-11.0.16.101-hotspot'
         jdk 'Java SE Development Kit 9.0.4'
     }
     environment {
         CI = 'true'
-        JAVA_HOME="${tool 'Java SE Development Kit 9.0.4'}"
+        JAVA_HOME="${tool 'jdk-11.0.16.101-hotspot'}"
         PATH="${env.JAVA_HOME}/bin:${env.PATH}"
     }
     stages {
@@ -31,6 +32,10 @@ pipeline {
             }
         }
         stage('SonarQube analysis') {
+            tools {
+                jdk 'jdk-11.0.16.101-hotspot'
+                jdk 'Java SE Development Kit 9.0.4'
+            }
             steps {
                 sh 'npm run test -- --coverage . --watchAll=false'
                 sh 'chmod +x /var/jenkins_home/workspace/simple-node-js-react-npm-app/node_modules/sonar-scanner/bin/sonar-scanner'
