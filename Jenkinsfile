@@ -6,11 +6,12 @@ pipeline {
         }
     }
     tools {
-        jdk 'jdk-11.0.16.101-hotspot'
         jdk 'Java SE Development Kit 9.0.4'
     }
     environment {
         CI = 'true'
+        JAVA_HOME="${tool 'Java SE Development Kit 9.0.4'}"
+        PATH="${env.JAVA_HOME}/bin:${env.PATH}"
     }
     stages {
          stage('Configure') {
