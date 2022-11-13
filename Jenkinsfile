@@ -5,9 +5,9 @@ pipeline {
             args '-p 3000:3000'
         }
     }
-     tools {
-    jdk 'jdk-11.0.16.101-hotspot'
-  }
+    tools {
+        jdk 'jdk-11.0.16.101-hotspot'
+    }
     environment {
         CI = 'true'
     }
