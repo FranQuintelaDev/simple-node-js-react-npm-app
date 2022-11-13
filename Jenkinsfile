@@ -25,6 +25,19 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
+        stage('SonarQube analysis') {
+            steps {
+                sh 'npm run test -- --coverage . --watchAll=false'
+                withSonarQubeEnv('SonarQube') {
+                    sh "npx sonar-scanner -D sonar.projectKey=React-SonarQube -D sonar.login=b082a592b5caae1791279ed841c00f3d865a24e4"
+                }
+            }
+        }
+        stage("Quality gate") {
+            steps {
+                waitForQualityGate abortPipeline: true
+            }
+        }
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
