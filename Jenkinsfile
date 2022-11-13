@@ -7,7 +7,7 @@ pipeline {
     }
     tools {
         jdk 'jdk-11.0.16.101-hotspot'
-        jre 'Java SE Development Kit 9.0.4'
+        jdk 'Java SE Development Kit 9.0.4'
     }
     environment {
         CI = 'true'
