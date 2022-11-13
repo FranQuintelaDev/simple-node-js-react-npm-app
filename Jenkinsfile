@@ -19,7 +19,7 @@ pipeline {
             steps {
                 sh 'set NODE_OPTIONS=--openssl-legacy-provider'
                 sh 'export NODE_OPTIONS=--openssl-legacy-provider'
-                withSonarQubeEnv('SonarQube', envOnly: true) {
+                withSonarQubeEnv('SonarQube') {
                   // This expands the evironment variables SONAR_CONFIG_NAME, SONAR_HOST_URL, SONAR_AUTH_TOKEN that can be used by any script.
                   println "${env.SONAR_HOST_URL}"
                   echo "${env.SONAR_HOST_URL}"
@@ -54,7 +54,6 @@ pipeline {
             steps {
                 sh 'npm run test -- --coverage . --watchAll=false'
                 sh 'chmod +x /var/jenkins_home/workspace/simple-node-js-react-npm-app/node_modules/sonar-scanner/bin/sonar-scanner'
-                sh 'java --version'
                 withSonarQubeEnv('SonarQube') {
                     sh "npx sonar-scanner -D sonar.projectKey=React-SonarQube -D sonar.login=b082a592b5caae1791279ed841c00f3d865a24e4"
                 }
